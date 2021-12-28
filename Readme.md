@@ -1,3 +1,5 @@
+[![<Diego Salazar>](https://circleci.com/gh/diegosalazar85/udacity-aws-devops-capstone-project.svg?style=svg)](https://circleci.com/gh/diegosalazar85/udacity-aws-devops-capstone-project)
+
 ## Project Overview
 
 In this project you will apply the skills and knowledge which were developed throughout the Cloud DevOps Nanodegree program. These include:

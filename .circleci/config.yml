@@ -45,7 +45,7 @@ jobs:
             docker image push $DOCKERHUB_REPOSITORY:${CIRCLE_WORKFLOW_ID:0:7}
 
 workflows:
-  build:
+  default:
     jobs:
       - lint
       - build_docker_image:

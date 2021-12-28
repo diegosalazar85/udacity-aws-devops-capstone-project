@@ -7,13 +7,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ubuntu:20.04
+      - image: alpine:latest
     working_directory: ~/repo
     steps:
       - checkout
       - run:
           name: install dependencies
           command: |
+            apk add --update --no-cache make
             make install
       - run:
           name: run lint

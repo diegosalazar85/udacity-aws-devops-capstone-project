@@ -30,6 +30,7 @@ jobs:
       - run:
           name: start Docker daemon
           command: |
+            rc-update add docker boot
             service docker start
       - run:
           name: docker login

@@ -26,7 +26,11 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            apk update && apk add --no-cache docker-cli
+            apk update && apk add --no-cache docker && apk add --no-cache docker-cli
+      - run:
+          name: start Docker daemon
+          command: |
+            service docker start
       - run:
           name: docker login
           command: |

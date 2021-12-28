@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  hello-world:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: project-capstone
+    ports:
+      - '80:80'

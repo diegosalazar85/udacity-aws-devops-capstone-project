@@ -19,19 +19,14 @@ jobs:
   
   build_docker_image:
     docker:
-      - image: alpine:latest
+      - image: ubuntu:20.04
     working_directory: ~/repo
     steps:
       - checkout
       - run:
           name: install dependencies
           command: |
-            apk update && apk add --no-cache docker && apk add --no-cache docker-cli
-      - run:
-          name: start Docker daemon
-          command: |
-            rc-update add docker boot
-            service docker start
+            apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io
       - run:
           name: docker login
           command: |

@@ -7,6 +7,11 @@
     src: Dockerfile
     dest: ~/Dockerfile
 
+- name: Copy static HTML
+  copy:
+    src: static-html
+    dest: ~/static-html
+
 - name: "build docker image"
   shell: |
     docker build --tag $DOCKERHUB_REPOSITORY:$CIRCLE_WORKFLOW_ID .

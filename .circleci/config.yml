@@ -51,11 +51,10 @@ jobs:
           name: Add back-end ip to ansible inventory
           command: |
             echo $PROVISIONING_SERVER_HOST >> .circleci/ansible/inventory.txt
-      
       - run:
           name: Copy Dockerfile
           command: |
-            cp Dockerfile ./ansible/roles/build-docker-image/files/Dockerfile
+            cp Dockerfile .circleci/ansible/roles/build-docker-image/files/Dockerfile
       - run:
           name: Build and Push Docker image
           command: |

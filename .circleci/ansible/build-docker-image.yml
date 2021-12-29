@@ -1,5 +1,4 @@
 ---
-
 - name: "configuration play." 
   hosts: provisioning
   user: ubuntu

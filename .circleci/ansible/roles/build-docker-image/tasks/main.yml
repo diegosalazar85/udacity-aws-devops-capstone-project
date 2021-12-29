@@ -2,6 +2,11 @@
   shell: |
     docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
 
+- name: Copy Dockerfile
+  copy:
+    src: Dockerfile
+    dest: ~/Dockerfile
+
 - name: "build docker image"
   shell: |
     docker build --tag $DOCKERHUB_REPOSITORY:$CIRCLE_WORKFLOW_ID .

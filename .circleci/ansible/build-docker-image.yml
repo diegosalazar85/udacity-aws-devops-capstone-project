@@ -1,0 +1,24 @@
+---
+
+- name: "configuration play." 
+  hosts: provisioning
+  user: ubuntu
+  gather_facts: false
+  vars:
+    - ansible_python_interpreter: /usr/bin/python3
+    - ansible_host_key_checking: false
+    - ansible_stdout_callback: yaml
+
+  pre_tasks:
+    - name: "wait 600 seconds for target connection to become reachable/usable."
+      wait_for_connection:
+        timeout: 600
+
+  environment:
+    - DOCKERHUB_PASSWORD: "{{ lookup('env', 'DOCKERHUB_PASSWORD')}}"
+    - DOCKERHUB_REPOSITORY: "{{ lookup('env', 'DOCKERHUB_REPOSITORY')}}"
+    - DOCKERHUB_USERNAME: "{{ lookup('env', 'DOCKERHUB_USERNAME')}}"
+    - CIRCLE_WORKFLOW_ID: "{{ lookup('env', 'CIRCLE_WORKFLOW_ID')}}"
+
+  roles:
+    - build-docker-image

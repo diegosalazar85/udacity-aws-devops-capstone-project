@@ -1,5 +1,25 @@
 version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@2.0.3
+
+commands:
+  install-aws-cli:
+    description: Install AWS CLI
+    steps:
+      - aws-cli/install
+      - aws-cli/setup
+  
+  install-ansible:
+    description: Install Ansible
+    steps:
+      - run:
+          name: Install Ansible
+          command: |
+            sudo apt-add-repository ppa:ansible/ansible
+            sudo apt update
+            sudo apt install -y ansible
+
 jobs:
   lint:
     docker:
@@ -15,32 +35,29 @@ jobs:
       - run:
           name: run lint
           command: |
-            make lint 
+            make lint
   
-  build_docker_image:
+  build_docker_image:   
     docker:
-      - image: ubuntu:20.04
-    working_directory: ~/repo
+      - image: cimg/python:3.7
     steps:
+      - install-aws-cli
+      - install-ansible
       - checkout
+      - add_ssh_keys:
+          fingerprints: 
+            - "44:6f:bb:68:d8:89:a9:bb:46:85:08:01:57:39:e2:38"
       - run:
-          name: install dependencies
+          name: Add back-end ip to ansible inventory
           command: |
-            apt update && apt install -y curl
-            curl -fsSL https://get.docker.com -o get-docker.sh
-            sh ./get-docker.sh
+            echo $PROVISIONING_SERVER_HOST >> .circleci/ansible/inventory.txt
       - run:
-          name: docker login
+          name: Build and Push Docker image
           command: |
-            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-      - run:
-          name: build docker image
-          command: |
-            docker build --tag $DOCKERHUB_REPOSITORY:${CIRCLE_WORKFLOW_ID:0:7} .
-      - run:
-          name: push docker image
-          command: |
-            docker image push $DOCKERHUB_REPOSITORY:${CIRCLE_WORKFLOW_ID:0:7}
+            cd .circleci/ansible
+            echo "Contents  of the inventory.txt file is -------"
+            cat inventory.txt
+            ansible-playbook -i inventory.txt build-docker-image.yml
 
 workflows:
   default:

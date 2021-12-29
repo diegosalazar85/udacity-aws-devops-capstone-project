@@ -1,0 +1,11 @@
+- name: "Docker login"
+  shell: |
+    docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+
+- name: "build docker image"
+  shell: |
+    docker build --tag $DOCKERHUB_REPOSITORY:$CIRCLE_WORKFLOW_ID .
+
+- name: "push docker image"
+  shell: |
+    docker image push $DOCKERHUB_REPOSITORY:$CIRCLE_WORKFLOW_ID

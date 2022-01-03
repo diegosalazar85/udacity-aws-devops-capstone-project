@@ -10,7 +10,7 @@
 - name: Copy static HTML
   copy:
     src: static-html
-    dest: ~/static-html
+    dest: ~/
 
 - name: "build docker image"
   shell: |

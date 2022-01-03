@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  hello-world:
+    # build:
+      # context: .
+      # dockerfile: Dockerfile
+    image: diegosalazar85/udacity-aws-devops-capstone-project:0561bf13-81ff-40dc-a00e-0fc9f768bea8
+    container_name: project-capstone
+    ports:
+      - '80:80'

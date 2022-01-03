@@ -14,6 +14,7 @@
         timeout: 600
 
   environment:
+    - AWS_DEFAULT_REGION: "{{ lookup('env', 'AWS_DEFAULT_REGION')}}"
     - DOCKERHUB_PASSWORD: "{{ lookup('env', 'DOCKERHUB_PASSWORD')}}"
     - DOCKERHUB_REPOSITORY: "{{ lookup('env', 'DOCKERHUB_REPOSITORY')}}"
     - DOCKERHUB_USERNAME: "{{ lookup('env', 'DOCKERHUB_USERNAME')}}"

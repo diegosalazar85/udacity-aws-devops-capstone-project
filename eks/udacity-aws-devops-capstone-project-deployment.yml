@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udacity-aws-devops-capstone-project-deployment
+  namespace: udacity-aws-devops-capstone-project
+  labels:
+    app: udacity-aws-devops-capstone-project
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: udacity-aws-devops-capstone-project
+  template:
+    metadata:
+      labels:
+        app: udacity-aws-devops-capstone-project
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+                - arm64
+      containers:
+      - name: nginx
+        image: diegosalazar85/udacity-aws-devops-capstone-project:0561bf13-81ff-40dc-a00e-0fc9f768bea8
+        ports:
+        - name: http
+          containerPort: 80
+        imagePullPolicy: IfNotPresent
+      imagePullSecrets:
+      - name: regcred
+      nodeSelector:
+        kubernetes.io/os: linux

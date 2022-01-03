@@ -4,7 +4,7 @@ services:
     # build:
       # context: .
       # dockerfile: Dockerfile
-    image: diegosalazar85/udacity-aws-devops-capstone-project:4c52e862-3299-44fc-b556-1fec5d3347e4
+    image: diegosalazar85/udacity-aws-devops-capstone-project:5c349f53-9d28-4619-86f8-c66eea9c4aad
     container_name: project-capstone
     ports:
       - '80:80'

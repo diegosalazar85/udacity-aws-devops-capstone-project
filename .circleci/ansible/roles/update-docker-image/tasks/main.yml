@@ -1,0 +1,10 @@
+- name: "Docker login"
+  shell: |
+    docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+
+- name: "Update kubectl config"
+  shell: |
+    aws eks update-kubeconfig \
+      --region $AWS_DEFAULT_REGION \
+      --name Udacity
+      

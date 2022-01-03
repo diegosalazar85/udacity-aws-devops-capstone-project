@@ -5,6 +5,6 @@ install:
 
 lint:
 	# This is linter for Dockerfiles
-	hadolint Dockerfile
+	hadolint .circleci/ansible/roles/build-docker-image/files/Dockerfile
 
 all: install lint

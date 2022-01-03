@@ -48,6 +48,27 @@ jobs:
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
             ansible-playbook -i inventory.txt build-docker-image.yml
+  
+  deploy_docker_image:   
+    docker:
+      - image: cimg/python:3.7
+    steps:
+      - install-ansible
+      - checkout
+      - add_ssh_keys:
+          fingerprints: 
+            - "44:6f:bb:68:d8:89:a9:bb:46:85:08:01:57:39:e2:38"
+      - run:
+          name: Add back-end ip to ansible inventory
+          command: |
+            echo $PROVISIONING_SERVER_HOST >> .circleci/ansible/inventory.txt
+      - run:
+          name: Deploy Docker image
+          command: |
+            cd .circleci/ansible
+            echo "Contents  of the inventory.txt file is -------"
+            cat inventory.txt
+            ansible-playbook -i inventory.txt deploy-docker-image.yml
 
 workflows:
   default:
@@ -55,3 +76,5 @@ workflows:
       - lint
       - build_docker_image:
           requires: [lint]
+      - deploy_docker_image:
+          requires: [build_docker_image]

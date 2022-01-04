@@ -10,8 +10,8 @@
 
 - name: "Set up  Kubctl context"
   shell: |
-    kubectl config set-context --current --namespace=udacity-aws-devops-capstone-projec
+    kubectl config set-context --current --namespace=udacity-aws-devops-capstone-project
 
 - name: "Deploy latest image"
   shell: |
-    kubectl set image deployment.apps/udacity-aws-devops-capstone-project-deployment nginx=$DOCKERHUB_REPOSITORY:$CIRCLE_WORKFLOW_ID -n udacity-aws-devops-capstone-projec
+    kubectl set image deployment.apps/udacity-aws-devops-capstone-project-deployment nginx=$DOCKERHUB_REPOSITORY:$CIRCLE_WORKFLOW_ID -n udacity-aws-devops-capstone-project

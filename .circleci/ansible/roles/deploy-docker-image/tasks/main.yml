@@ -2,11 +2,15 @@
   shell: |
     docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
 
-- name: "Update kubectl config"
+- name: "Update kubectl config to use AWS EKS Cluster"
   shell: |
     aws eks update-kubeconfig \
       --region $AWS_DEFAULT_REGION \
       --name Udacity
+
+- name: "Set up  Kubctl context"
+  shell: |
+    kubectl config set-context --current --namespace=udacity-aws-devops-capstone-projec
 
 - name: "Deploy latest image"
   shell: |

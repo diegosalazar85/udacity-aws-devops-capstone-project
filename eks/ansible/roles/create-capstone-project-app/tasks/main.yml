@@ -1,0 +1,37 @@
+- name: "Create Namespace"
+  shell: |
+    kubectl create namespace udacity-aws-devops-capstone-project
+
+- name: "Create K8s Secret"
+  shell: |
+    kubectl create secret docker-registry regcred --docker-server=$DOCKERHUB_REGISTRY --docker-username=$DOCKERHUB_USERNAME --docker-password=$DOCKERHUB_PASSWORD --docker-email=$DOCKERHUB_EMAIL
+
+- name: "Verify K8s Secret"
+  shell: |
+    kubectl get secret regcred --output=yaml
+
+- name: "Verify K8s Secret"
+  shell: |
+    kubectl get secret regcred --output=yaml
+
+- name: "Copy k8s deployment configuration"
+  copy:
+    src: udacity-aws-devops-capstone-project-deployment.yml
+    dest: ~/udacity-aws-devops-capstone-project-deployment.yml
+
+- name: "Create k8s deployment"
+  shell: |
+    kubectl apply -f ~/udacity-aws-devops-capstone-project-deployment.yml
+
+- name: "Copy k8s service configuration"
+  copy:
+    src: udacity-aws-devops-capstone-project-service.yml
+    dest: ~/udacity-aws-devops-capstone-project-service.yml
+
+- name: "Create k8s service"
+  shell: |
+    kubectl apply -f ~/udacity-aws-devops-capstone-project-service.yml
+
+- name: "View k8s app resources"
+  shell: |
+    kubectl get all -n udacity-aws-devops-capstone-project

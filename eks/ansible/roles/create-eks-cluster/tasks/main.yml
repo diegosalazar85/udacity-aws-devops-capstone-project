@@ -1,0 +1,5 @@
+- name: "Create EKS Cluster"
+  shell: |
+    eksctl create cluster \
+      --name Udacity \
+      --region $AWS_DEFAULT_REGION

@@ -26,9 +26,40 @@ You can find a detailed [project rubric, here](https://review.udacity.com/#!/rub
 
 ---
 
+## Repository
+
+Github Link: https://github.com/diegosalazar85/udacity-aws-devops-capstone-project
+
+---
+
 ## Setup the Environment
 
-* Setup and Configure Docker locally
-* Setup and Configure Kubernetes locally
-* Create Hello World Container
-* Run via kubectl
+### Requried Environment Variables
+
+* `AWS_DEFAULT_REGION`: AWS region were the AWS EKS cluster wil be created.
+* `DOCKERHUB_EMAIL`: Docker registry account email address
+* `DOCKERHUB_PASSWORD`: Docker registry account password
+* `DOCKERHUB_REGISTRY`: Docker registry URL
+* `DOCKERHUB_USERNAME`: Docker registry username
+
+### Create AWS EKS Cluster
+
+1. Go to `eks/ansible` directory
+```
+$ cd ./eks/ansible
+```
+2. Execute ansible playbook
+```
+$ ansible-playbook -i inventory.txt --private-key <PATH_TO_PRIVATE_KEY> create-eks-cluster.yml 
+```
+
+### Create K8s App
+
+1. Go to `eks/ansible` directory
+```
+$ cd ./eks/ansible
+```
+2. Execute ansible playbook
+```
+$ ansible-playbook -i inventory.txt --private-key <PATH_TO_PRIVATE_KEY> create-capstone-project-app.yml 
+```

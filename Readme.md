@@ -34,7 +34,7 @@ Github Link: https://github.com/diegosalazar85/udacity-aws-devops-capstone-proje
 
 ## Setup the Environment
 
-### Requried Environment Variables
+### Required Environment Variables
 
 * `AWS_DEFAULT_REGION`: AWS region were the AWS EKS cluster wil be created.
 * `DOCKERHUB_EMAIL`: Docker registry account email address
